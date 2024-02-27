@@ -13,6 +13,14 @@
 		F884053A2B8D72F700DF1F55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F88405382B8D72F700DF1F55 /* Main.storyboard */; };
 		F884053C2B8D72F900DF1F55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F884053B2B8D72F900DF1F55 /* Assets.xcassets */; };
 		F884053F2B8D72F900DF1F55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F884053D2B8D72F900DF1F55 /* LaunchScreen.storyboard */; };
+		F88405472B8D730B00DF1F55 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88405462B8D730B00DF1F55 /* Utils.swift */; };
+		F88405492B8D731E00DF1F55 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88405482B8D731E00DF1F55 /* AppCoordinator.swift */; };
+		F884054C2B8D736500DF1F55 /* MemoramaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F884054B2B8D736500DF1F55 /* MemoramaViewController.swift */; };
+		F884054E2B8D737600DF1F55 /* MemoramaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F884054D2B8D737600DF1F55 /* MemoramaViewModel.swift */; };
+		F88405502B8D738600DF1F55 /* MemoramaCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F884054F2B8D738600DF1F55 /* MemoramaCoordinator.swift */; };
+		F88405532B8D73BD00DF1F55 /* MemoramaCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88405522B8D73BD00DF1F55 /* MemoramaCollectionView.swift */; };
+		F88405552B8D73D700DF1F55 /* MemoramaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88405542B8D73D700DF1F55 /* MemoramaCollectionViewCell.swift */; };
+		F88405582B8D79C900DF1F55 /* ModelMemorama.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88405572B8D79C900DF1F55 /* ModelMemorama.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +32,14 @@
 		F884053B2B8D72F900DF1F55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F884053E2B8D72F900DF1F55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F88405402B8D72F900DF1F55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F88405462B8D730B00DF1F55 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		F88405482B8D731E00DF1F55 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		F884054B2B8D736500DF1F55 /* MemoramaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoramaViewController.swift; sourceTree = "<group>"; };
+		F884054D2B8D737600DF1F55 /* MemoramaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoramaViewModel.swift; sourceTree = "<group>"; };
+		F884054F2B8D738600DF1F55 /* MemoramaCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoramaCoordinator.swift; sourceTree = "<group>"; };
+		F88405522B8D73BD00DF1F55 /* MemoramaCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoramaCollectionView.swift; sourceTree = "<group>"; };
+		F88405542B8D73D700DF1F55 /* MemoramaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoramaCollectionViewCell.swift; sourceTree = "<group>"; };
+		F88405572B8D79C900DF1F55 /* ModelMemorama.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMemorama.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +73,9 @@
 			isa = PBXGroup;
 			children = (
 				F88405322B8D72F700DF1F55 /* AppDelegate.swift */,
+				F88405482B8D731E00DF1F55 /* AppCoordinator.swift */,
+				F88405462B8D730B00DF1F55 /* Utils.swift */,
+				F884054A2B8D733300DF1F55 /* MemoramaView */,
 				F88405342B8D72F700DF1F55 /* SceneDelegate.swift */,
 				F88405362B8D72F700DF1F55 /* ViewController.swift */,
 				F88405382B8D72F700DF1F55 /* Main.storyboard */,
@@ -65,6 +84,35 @@
 				F88405402B8D72F900DF1F55 /* Info.plist */,
 			);
 			path = Memorama;
+			sourceTree = "<group>";
+		};
+		F884054A2B8D733300DF1F55 /* MemoramaView */ = {
+			isa = PBXGroup;
+			children = (
+				F88405562B8D791F00DF1F55 /* Models */,
+				F884054B2B8D736500DF1F55 /* MemoramaViewController.swift */,
+				F88405512B8D739600DF1F55 /* MemoramaCollectionView */,
+				F884054D2B8D737600DF1F55 /* MemoramaViewModel.swift */,
+				F884054F2B8D738600DF1F55 /* MemoramaCoordinator.swift */,
+			);
+			path = MemoramaView;
+			sourceTree = "<group>";
+		};
+		F88405512B8D739600DF1F55 /* MemoramaCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				F88405522B8D73BD00DF1F55 /* MemoramaCollectionView.swift */,
+				F88405542B8D73D700DF1F55 /* MemoramaCollectionViewCell.swift */,
+			);
+			path = MemoramaCollectionView;
+			sourceTree = "<group>";
+		};
+		F88405562B8D791F00DF1F55 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F88405572B8D79C900DF1F55 /* ModelMemorama.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +187,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F88405372B8D72F700DF1F55 /* ViewController.swift in Sources */,
+				F88405532B8D73BD00DF1F55 /* MemoramaCollectionView.swift in Sources */,
 				F88405332B8D72F700DF1F55 /* AppDelegate.swift in Sources */,
+				F88405582B8D79C900DF1F55 /* ModelMemorama.swift in Sources */,
+				F88405492B8D731E00DF1F55 /* AppCoordinator.swift in Sources */,
+				F884054C2B8D736500DF1F55 /* MemoramaViewController.swift in Sources */,
 				F88405352B8D72F700DF1F55 /* SceneDelegate.swift in Sources */,
+				F88405472B8D730B00DF1F55 /* Utils.swift in Sources */,
+				F884054E2B8D737600DF1F55 /* MemoramaViewModel.swift in Sources */,
+				F88405552B8D73D700DF1F55 /* MemoramaCollectionViewCell.swift in Sources */,
+				F88405502B8D738600DF1F55 /* MemoramaCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

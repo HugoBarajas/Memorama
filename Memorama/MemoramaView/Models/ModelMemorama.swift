@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+class ModelMemorama{
+  
+  var NombreEmogi : String
+  
+  init(NombreEmogi: String) {
+    self.NombreEmogi = NombreEmogi
+  }
+}
+
+

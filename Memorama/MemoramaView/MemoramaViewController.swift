@@ -8,22 +8,36 @@
 import UIKit
 
 class MemoramaViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+  
+  var viewModel : MemoramaViewModel!
+  
+  var collectionMemorama : MemoramaCollectionView = {
+    var collectionView = MemoramaCollectionView()
     
+    return collectionView
+    
+  }()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = .systemBlue
+    collectionMemorama.delegate = self
+    initUI()
+    
+  }
+  
+  func initUI(){
+    view.addSubview(collectionMemorama)
+    collectionMemorama.addAnchorsAndCenter(centerX: true, centerY: true, width: width - 20, height: height / 5, left: nil, top: nil, right: nil, bottom: nil)
+  }
+  
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+extension MemoramaViewController : MemoramaCollectionViewDelegate{
+  func alert(title: String, message: String) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Ok", style: .default))
+    present(alert, animated: true)
+  }
+  
 }
