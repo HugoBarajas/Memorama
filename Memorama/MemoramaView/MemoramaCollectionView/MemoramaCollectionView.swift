@@ -14,6 +14,8 @@ protocol MemoramaCollectionViewDelegate{
 
 class MemoramaCollectionView : UIView  {
   
+  var dataEmogis = [String]()
+  
   var contadorCorrecto = 0
   
   var contadorIncorrecro = 0
@@ -22,13 +24,11 @@ class MemoramaCollectionView : UIView  {
   
   var ultimaCeldaIndexPath: IndexPath?
   
-  var dataSource = [ModelMemorama]()
-  
   var collectionViewMemorama : UICollectionView = {
     var layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    layout.minimumLineSpacing = 0
-    layout.minimumInteritemSpacing = 0
+    layout.scrollDirection = .vertical
+    layout.minimumLineSpacing = 1
+    layout.minimumInteritemSpacing = 1
     
     var collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collection.backgroundColor = .white
@@ -40,7 +40,6 @@ class MemoramaCollectionView : UIView  {
   init(){
     super.init(frame: .zero)
     self.backgroundColor = .cyan
-    createData()
     initUI()
   }
   
@@ -48,31 +47,13 @@ class MemoramaCollectionView : UIView  {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func createData(){
-    let texto1 = ModelMemorama(NombreEmogi: "⚽️")
-    
-    
-    let texto2 = ModelMemorama(NombreEmogi: "🏀")
-    
-    let texto3 = ModelMemorama(NombreEmogi: "🏈")
-    
-    let texto4 = ModelMemorama(NombreEmogi: "⚾️")
-    
-    let texto5 = ModelMemorama(NombreEmogi: "🎱")
-    
-    let texto6 = ModelMemorama(NombreEmogi: "⚽️")
-    
-    let texto7 = ModelMemorama(NombreEmogi: "🏈")
-    
-    let texto8 = ModelMemorama(NombreEmogi: "🎱")
-    
-    let texto9 = ModelMemorama(NombreEmogi: "⚾️")
-    
-    let texto10 = ModelMemorama(NombreEmogi: "🏀")
-    
-    dataSource.append(contentsOf: [texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10])
-    
+  func receiveData(info : [String]){
+    self.dataEmogis = info
+    print("ya llegue \(dataEmogis)")
+    collectionViewMemorama.reloadData()
   }
+  
+ 
   
   func initUI(){
     collectionViewMemorama.delegate = self
@@ -88,13 +69,13 @@ class MemoramaCollectionView : UIView  {
 extension MemoramaCollectionView : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    dataSource.count
+    dataEmogis.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MemoramaCollectionViewCell
     
-    let info = dataSource[indexPath.item]
+    let info = dataEmogis[indexPath.item]
     
     cell.initUI(dataSource: info)
     
@@ -102,7 +83,7 @@ extension MemoramaCollectionView : UICollectionViewDelegate, UICollectionViewDat
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: width / 5, height: height / 10)
+    return CGSize(width: width / 2.12, height: height / 10)
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -110,54 +91,73 @@ extension MemoramaCollectionView : UICollectionViewDelegate, UICollectionViewDat
     guard let ultimoIndexPath = ultimaCeldaIndexPath else {
       // Si no hay ninguna celda seleccionada anteriormente, guarda el IndexPath actual y sal del método
       self.ultimaCeldaIndexPath = indexPath
+      if let cell = collectionView.cellForItem(at: indexPath) as? MemoramaCollectionViewCell {
+        cell.labelOculta.backgroundColor = .clear
+      }
       return
     }
     
     
     let ultimaCelda = collectionView.cellForItem(at: ultimoIndexPath) as? MemoramaCollectionViewCell
+  
     
     let celdaActual = collectionView.cellForItem(at: indexPath) as? MemoramaCollectionViewCell
     
     
     if ultimaCelda!.labelMemorama.text == celdaActual!.labelMemorama.text {
       if ultimaCelda != celdaActual{
+       
         ultimaCelda?.labelOculta.backgroundColor = .clear
+       
         celdaActual?.labelOculta.backgroundColor = .clear
+     
         contadorCorrecto += 2
-        contadorIncorrecro -= 2
+        
+        
         print("Llevas estas bien: \(String(contadorCorrecto))")
-        if contadorCorrecto == dataSource.count{
-          delegate?.alert(title: "Has ganado el juego.", message: "")
+          if contadorCorrecto == dataEmogis.count{
+            delegate?.alert(title: "Has ganado el juego.", message: "")
+            self.ultimaCeldaIndexPath = nil
+            contadorCorrecto = 0
+            contadorIncorrecro = 0
+            reiniciarJuego()
           
-          contadorCorrecto = 0
-          contadorIncorrecro = 0
-          reiniciarJuego()
-          
-        }
+          }else if contadorCorrecto <= dataEmogis.count{
+            delegate?.alert(title: "Vas bien", message: "")
+          }
         
       }
     }else{
       contadorIncorrecro += 2
+      
+      celdaActual?.labelOculta.backgroundColor = .black
+      
+      ultimaCelda?.labelOculta.backgroundColor = .black
+      
       print("Llevas estas mal: \(String(contadorIncorrecro))")
-      if contadorIncorrecro >= dataSource.count{
+      
+      if contadorIncorrecro == dataEmogis.count{
         delegate?.alert(title: "Perdiste.", message: "")
         
         contadorIncorrecro = 0
         contadorCorrecto = 0
         reiniciarJuego()
+      }else if contadorIncorrecro <= dataEmogis.count{
+        delegate?.alert(title: "No son las mismas", message: "")
       }
     }
     // Actualiza el IndexPath de la última celda seleccionada
-    self.ultimaCeldaIndexPath = indexPath
+    self.ultimaCeldaIndexPath = nil
   }
+  
+  
   
   func reiniciarJuego(){
     
     let timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(cambiarPaVer), userInfo: nil, repeats: false)
     
     collectionViewMemorama.reloadData()
-    
-    ultimaCeldaIndexPath = nil
+  
   }
   
   @objc func cambiarPaVer(){

@@ -9,7 +9,7 @@ import UIKit
 
 class MemoramaCollectionViewCell: UICollectionViewCell {
   
-  var dataSource : ModelMemorama?
+  var dataSource : String?
   
   var labelMemorama : UILabel = {
     var label = UILabel()
@@ -21,16 +21,18 @@ class MemoramaCollectionViewCell: UICollectionViewCell {
   
   var labelOculta : UILabel = {
     var label = UILabel()
-    
+    label.font = .systemFont(ofSize: 30)
     label.backgroundColor = .clear
-    
+    label.text = "?"
+    label.textAlignment = .center
+    label.textColor = .white
     return label
     
   }()
   
   override init(frame : CGRect) {
     super.init(frame: .zero)
-    self.backgroundColor = .white
+    self.backgroundColor = .lightGray
     
     
   }
@@ -39,9 +41,8 @@ class MemoramaCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func initUI(dataSource : ModelMemorama){
-    labelMemorama.text = dataSource.NombreEmogi
-    let timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(cambioLabel), userInfo: nil, repeats: false)
+  func initUI(dataSource : String){
+    labelMemorama.text = dataSource
     
     self.addSubview(labelMemorama)
     labelMemorama.addAnchorsWithMargin(0)
@@ -49,12 +50,7 @@ class MemoramaCollectionViewCell: UICollectionViewCell {
     self.addSubview(labelOculta)
     labelOculta.addAnchorsWithMargin(0)
   }
-  
-  
-  @objc func cambioLabel(){
-    let translucentBlack = UIColor.black.withAlphaComponent(0.9)
-    labelOculta.backgroundColor = translucentBlack
-  }
+
 }
 
 
